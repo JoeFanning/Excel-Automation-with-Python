@@ -4,10 +4,12 @@ This repository provides a streamlined way to automate Microsoft Excel tasks usi
 
 ## 🚀 Key Features
 
-*   **One-Click Workflows:** Execute complex Python logic via simple batch or command scripts.
+**One-Click Workflows:** Execute complex Python logic via simple batch or command scripts.
 *   **Modern Management:** Uses `pyproject.toml` for seamless installation and dependency handling.
-*   **Data Power:** Leverages **pandas** for heavy data crunching and **openpyxl** for fine-tuned Excel formatting.
+*   **Data Power:** Leverages `pandas` for heavy data crunching and `openpyxl` for fine-tuned Excel formatting.
+*   **Automated Visuals:** Generate professional charts and data visualizations directly within your workbooks.
 *   **Cross-Platform:** Native execution support for Windows and macOS.
+
 
 ## 🖱️ One-Click Execution
 
