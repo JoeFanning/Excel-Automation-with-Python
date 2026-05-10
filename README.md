@@ -4,10 +4,10 @@ This repository provides a streamlined way to automate Microsoft Excel tasks usi
 
 ## 🚀 Key Features
 
-*   **One-Click Workflows:** Execute complex Python logic via simple batch or shell scripts.
+*   **One-Click Workflows:** Execute complex Python logic via simple batch or command scripts.
 *   **Modern Management:** Uses `pyproject.toml` for seamless installation and dependency handling.
 *   **Data Power:** Leverages **pandas** for heavy data crunching and **openpyxl** for fine-tuned Excel formatting.
-*   **Cross-Platform:** Full support for Windows, macOS, and Linux.
+*   **Cross-Platform:** Native execution support for Windows and macOS.
 
 ## 🖱️ One-Click Execution
 
@@ -15,11 +15,11 @@ No need to open a code editor or use the terminal manually. Just use the launche
 
 ### **Windows (`.bat`)**
 - **To Run:** Double-click `run_automation.bat`.
-- **Benefit:** It automatically triggers the Python environment and keeps the window open so you can see the "Success" message or troubleshoot errors.
+- **Benefit:** It triggers the Python environment and keeps the window open so you can see the "Success" message or troubleshoot any data errors.
 
-### **macOS & Linux (`.sh`)**
-- **To Run:** Double-click `run_automation.sh` (or run `./run_automation.sh` in terminal).
-- **Note:** On first use, you may need to grant permission by running `chmod +x run_automation.sh` in your terminal.
+### **macOS (`.command`)**
+- **To Run:** Double-click `run_automation.command`.
+- **Note:** On first use, you may need to grant permission by right-clicking the file and selecting "Open," or by running `chmod +x run_automation.command` in your terminal to make it executable.
 
 ## 🛠️ Installation & Setup
 
@@ -39,8 +39,9 @@ No need to open a code editor or use the terminal manually. Just use the launche
 ## 💻 Usage
 
 1. Place your source Excel files in the designated input folder.
-2. Run your OS-specific launcher (the `.bat` or `.sh` file).
+2. Run your OS-specific launcher (the `.bat` or `.command` file).
 3. Find your processed results in the output folder.
 
 ## 📄 License
 This project is open-source and free to use for personal or commercial automation.
+
