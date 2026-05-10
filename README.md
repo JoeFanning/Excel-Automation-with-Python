@@ -25,7 +25,7 @@ No need to open a code editor or use the terminal manually. Just use the launche
 
 1.  **Clone the Repo:**
     ```bash
-    git clone https://github.com
+    git clone https://github.com/JoeFanning/Excel-Automation-with-Python.git)
     cd Excel-Automation-with-Python
     ```
 
