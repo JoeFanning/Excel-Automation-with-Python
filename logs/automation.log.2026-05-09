@@ -1,0 +1,425 @@
+2026-05-09 18:23:12,559 - INFO - Program Started
+2026-05-09 18:23:12,613 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:23:12,618 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:23:12,621 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:23:12,622 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:30:04,920 - INFO - Program Started
+2026-05-09 18:30:04,920 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:30:04,920 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:30:04,935 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:30:04,935 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:33:16,273 - INFO - Program Started
+2026-05-09 18:33:16,273 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:33:16,273 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:33:16,273 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:33:16,273 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:34:00,257 - INFO - Program Started
+2026-05-09 18:34:00,273 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:34:00,273 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:34:00,273 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:34:00,273 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:35:35,555 - INFO - Program Started
+2026-05-09 18:35:35,571 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:35:35,571 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:35:35,571 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:35:35,571 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:43:45,514 - INFO - Program Started
+2026-05-09 18:43:45,514 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:43:45,514 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:43:45,514 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:43:45,514 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:47:17,828 - INFO - Program Started
+2026-05-09 18:47:17,860 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:47:17,860 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:47:17,875 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:47:17,875 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:48:52,927 - INFO - Program Started
+2026-05-09 18:48:52,927 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:48:52,927 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:48:52,927 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:48:52,927 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:49:30,902 - INFO - Program Started
+2026-05-09 18:49:30,908 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:49:30,913 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:49:30,918 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:49:30,919 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:52:03,380 - INFO - Program Started
+2026-05-09 18:52:03,384 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:52:03,384 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:52:03,384 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:52:03,384 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 18:55:21,055 - INFO - Program Started
+2026-05-09 18:55:21,061 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:55:21,064 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:55:21,065 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 18:55:21,065 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 19:02:17,876 - INFO - Program Started
+2026-05-09 19:02:17,880 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 19:02:17,880 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 19:02:17,880 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 19:02:17,880 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 19:10:43,760 - INFO - Program Started
+2026-05-09 19:10:43,760 - ERROR - Error reading sales_feb.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 19:10:43,760 - ERROR - Error reading sales_jan.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 19:10:43,760 - ERROR - Error reading sales_mar.xlsx: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2026-05-09 19:10:43,760 - ERROR - Critical Error: No Excel files found in input
+2026-05-09 19:33:42,768 - INFO - Program Started
+2026-05-09 19:33:44,721 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 19:33:44,814 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 19:33:44,939 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 19:33:45,017 - INFO - Data cleaning completed.
+2026-05-09 19:33:45,017 - INFO - Data sorting completed.
+2026-05-09 19:33:45,017 - INFO - Performing calculations...
+2026-05-09 19:33:45,017 - INFO - Total Revenue: €2,207,643.55
+2026-05-09 19:33:45,017 - INFO - Total Units: 11,057
+2026-05-09 19:33:45,017 - INFO - Sales by Payment Type:
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+2026-05-09 19:33:45,814 - INFO - File saved to output/merged_sales.xlsx
+2026-05-09 19:42:32,728 - INFO - Program Started
+2026-05-09 19:42:33,400 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 19:42:33,528 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 19:42:33,676 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 19:42:33,757 - INFO - Data cleaning completed.
+2026-05-09 19:42:33,774 - INFO - Data sorting completed.
+2026-05-09 19:42:33,774 - ERROR - Critical Error: name 'run_calculations' is not defined
+2026-05-09 19:43:54,894 - INFO - Program Started
+2026-05-09 19:43:55,693 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 19:43:55,803 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 19:43:55,977 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 19:43:56,069 - INFO - Data cleaning completed.
+2026-05-09 19:43:56,069 - INFO - Data sorting completed.
+2026-05-09 19:43:56,069 - INFO - Performing calculations...
+2026-05-09 19:43:56,084 - INFO - Total Revenue           : €2,207,643.55
+2026-05-09 19:43:56,084 - INFO - Total Units Sold        : 11,057
+2026-05-09 19:43:56,084 - INFO - Total Transactions      : 2,000
+2026-05-09 19:43:56,084 - INFO - Average Order Value     : €1103.82
+
+2026-05-09 19:43:56,084 - INFO - Top 5 Best Selling Products :
+Product
+Monitor    €347,995.64
+Phone      €326,211.21
+Printer    €325,584.95
+Chair      €319,442.15
+Tablet     €308,449.27
+Name: TotalPrice, dtype: object
+
+2026-05-09 19:43:56,084 - INFO - Bottom 3 Selling Products   :
+Product
+Unknown      €1,418.52
+Laptop     €283,192.67
+Desk       €295,349.14
+Name: TotalPrice, dtype: object
+
+2026-05-09 19:43:56,101 - INFO - Sales by Location :
+              Revenue  Units_Sold
+Location                         
+Store A   €522,302.16        2630
+Store B   €538,392.13        2719
+Store C   €595,009.04        3007
+Store D   €551,940.22        2701
+
+2026-05-09 19:43:56,101 - INFO - Sales by Time of Day    :
+TimeOfDay
+Evening      €856,664.52
+Afternoon    €794,418.64
+Morning      €556,560.39
+Name: TotalPrice, dtype: object
+
+2026-05-09 19:43:56,104 - INFO - Sales by Payment Type   :
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+
+2026-05-09 19:43:56,104 - INFO - Top Store Manager       : Noah (€608,430.74)
+
+2026-05-09 19:43:56,895 - INFO - File saved to output/merged_sales.xlsx
+2026-05-09 20:25:12,214 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 20:25:12,308 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 20:25:12,417 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 20:25:12,495 - INFO - Data cleaning completed.
+2026-05-09 20:25:12,495 - INFO - Data sorting completed.
+2026-05-09 20:25:12,495 - INFO - Performing calculations...
+2026-05-09 20:25:12,511 - INFO - Total Revenue           : €2,207,643.55
+2026-05-09 20:25:12,511 - INFO - Total Units Sold        : 11,057
+2026-05-09 20:25:12,511 - INFO - Total Transactions      : 2,000
+2026-05-09 20:25:12,511 - INFO - Average Order Value     : €1103.82
+
+2026-05-09 20:25:12,511 - INFO - Top 5 Best Selling Products :
+Product
+Monitor    €347,995.64
+Phone      €326,211.21
+Printer    €325,584.95
+Chair      €319,442.15
+Tablet     €308,449.27
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:25:12,511 - INFO - Bottom 3 Selling Products   :
+Product
+Unknown      €1,418.52
+Laptop     €283,192.67
+Desk       €295,349.14
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:25:12,511 - INFO - Sales by Location :
+              Revenue  Units_Sold
+Location                         
+Store A   €522,302.16        2630
+Store B   €538,392.13        2719
+Store C   €595,009.04        3007
+Store D   €551,940.22        2701
+
+2026-05-09 20:25:12,511 - INFO - Sales by Time of Day    :
+TimeOfDay
+Evening      €856,664.52
+Afternoon    €794,418.64
+Morning      €556,560.39
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:25:12,511 - INFO - Sales by Payment Type   :
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:25:12,511 - INFO - Top Store Manager       : Noah (€608,430.74)
+
+2026-05-09 20:25:12,511 - ERROR - Critical Error: create_sales_chart() takes from 1 to 2 positional arguments but 3 were given
+2026-05-09 20:26:41,702 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 20:26:41,811 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 20:26:41,936 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 20:26:41,999 - INFO - Data cleaning completed.
+2026-05-09 20:26:42,014 - INFO - Data sorting completed.
+2026-05-09 20:26:42,014 - INFO - Performing calculations...
+2026-05-09 20:26:42,014 - INFO - Total Revenue           : €2,207,643.55
+2026-05-09 20:26:42,014 - INFO - Total Units Sold        : 11,057
+2026-05-09 20:26:42,014 - INFO - Total Transactions      : 2,000
+2026-05-09 20:26:42,014 - INFO - Average Order Value     : €1103.82
+
+2026-05-09 20:26:42,014 - INFO - Top 5 Best Selling Products :
+Product
+Monitor    €347,995.64
+Phone      €326,211.21
+Printer    €325,584.95
+Chair      €319,442.15
+Tablet     €308,449.27
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:26:42,014 - INFO - Bottom 3 Selling Products   :
+Product
+Unknown      €1,418.52
+Laptop     €283,192.67
+Desk       €295,349.14
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:26:42,014 - INFO - Sales by Location :
+              Revenue  Units_Sold
+Location                         
+Store A   €522,302.16        2630
+Store B   €538,392.13        2719
+Store C   €595,009.04        3007
+Store D   €551,940.22        2701
+
+2026-05-09 20:26:42,014 - INFO - Sales by Time of Day    :
+TimeOfDay
+Evening      €856,664.52
+Afternoon    €794,418.64
+Morning      €556,560.39
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:26:42,014 - INFO - Sales by Payment Type   :
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:26:42,014 - INFO - Top Store Manager       : Noah (€608,430.74)
+
+2026-05-09 20:26:42,014 - INFO - Generating sales chart...
+2026-05-09 20:26:43,608 - INFO - Chart successfully saved to output\sales_trends.png
+2026-05-09 20:26:45,560 - INFO - File saved to output/merged_sales.xlsx
+2026-05-09 20:36:16,605 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 20:36:16,698 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 20:36:16,854 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 20:36:16,948 - INFO - Data cleaning completed.
+2026-05-09 20:36:16,948 - INFO - Data sorting completed.
+2026-05-09 20:36:16,948 - INFO - Performing calculations...
+2026-05-09 20:36:16,964 - INFO - Total Revenue           : €2,207,643.55
+2026-05-09 20:36:16,964 - INFO - Total Units Sold        : 11,057
+2026-05-09 20:36:16,964 - INFO - Total Transactions      : 2,000
+2026-05-09 20:36:16,964 - INFO - Average Order Value     : €1103.82
+
+2026-05-09 20:36:16,964 - INFO - Top 5 Best Selling Products :
+Product
+Monitor    €347,995.64
+Phone      €326,211.21
+Printer    €325,584.95
+Chair      €319,442.15
+Tablet     €308,449.27
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:36:16,964 - INFO - Bottom 3 Selling Products   :
+Product
+Unknown      €1,418.52
+Laptop     €283,192.67
+Desk       €295,349.14
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:36:16,964 - INFO - Sales by Location :
+              Revenue  Units_Sold
+Location                         
+Store A   €522,302.16        2630
+Store B   €538,392.13        2719
+Store C   €595,009.04        3007
+Store D   €551,940.22        2701
+
+2026-05-09 20:36:16,964 - INFO - Sales by Time of Day    :
+TimeOfDay
+Evening      €856,664.52
+Afternoon    €794,418.64
+Morning      €556,560.39
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:36:16,964 - INFO - Sales by Payment Type   :
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:36:16,964 - INFO - Top Store Manager       : Noah (€608,430.74)
+
+2026-05-09 20:36:16,964 - ERROR - Critical Error: name 'create_sales_chart' is not defined
+2026-05-09 20:37:05,159 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 20:37:05,253 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 20:37:05,378 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 20:37:05,456 - INFO - Data cleaning completed.
+2026-05-09 20:37:05,472 - INFO - Data sorting completed.
+2026-05-09 20:37:05,472 - INFO - Performing calculations...
+2026-05-09 20:37:05,472 - INFO - Total Revenue           : €2,207,643.55
+2026-05-09 20:37:05,472 - INFO - Total Units Sold        : 11,057
+2026-05-09 20:37:05,472 - INFO - Total Transactions      : 2,000
+2026-05-09 20:37:05,472 - INFO - Average Order Value     : €1103.82
+
+2026-05-09 20:37:05,472 - INFO - Top 5 Best Selling Products :
+Product
+Monitor    €347,995.64
+Phone      €326,211.21
+Printer    €325,584.95
+Chair      €319,442.15
+Tablet     €308,449.27
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:37:05,472 - INFO - Bottom 3 Selling Products   :
+Product
+Unknown      €1,418.52
+Laptop     €283,192.67
+Desk       €295,349.14
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:37:05,472 - INFO - Sales by Location :
+              Revenue  Units_Sold
+Location                         
+Store A   €522,302.16        2630
+Store B   €538,392.13        2719
+Store C   €595,009.04        3007
+Store D   €551,940.22        2701
+
+2026-05-09 20:37:05,472 - INFO - Sales by Time of Day    :
+TimeOfDay
+Evening      €856,664.52
+Afternoon    €794,418.64
+Morning      €556,560.39
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:37:05,472 - INFO - Sales by Payment Type   :
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:37:05,472 - INFO - Top Store Manager       : Noah (€608,430.74)
+
+2026-05-09 20:37:05,472 - INFO - Generating multi-chart dashboard...
+2026-05-09 20:37:06,581 - INFO - Dashboard saved to output\sales_dashboard.png
+2026-05-09 20:37:06,581 - INFO - Generating multi-chart dashboard...
+2026-05-09 20:37:08,502 - INFO - Dashboard saved to output\sales_dashboard.png
+2026-05-09 20:37:09,424 - INFO - File saved to output/merged_sales.xlsx
+2026-05-09 20:38:08,955 - INFO - Loaded: sales_feb.xlsx
+2026-05-09 20:38:09,049 - INFO - Loaded: sales_jan.xlsx
+2026-05-09 20:38:09,174 - INFO - Loaded: sales_mar.xlsx
+2026-05-09 20:38:09,236 - INFO - Data cleaning completed.
+2026-05-09 20:38:09,252 - INFO - Data sorting completed.
+2026-05-09 20:38:09,252 - INFO - Performing calculations...
+2026-05-09 20:38:09,252 - INFO - Total Revenue           : €2,207,643.55
+2026-05-09 20:38:09,252 - INFO - Total Units Sold        : 11,057
+2026-05-09 20:38:09,252 - INFO - Total Transactions      : 2,000
+2026-05-09 20:38:09,252 - INFO - Average Order Value     : €1103.82
+
+2026-05-09 20:38:09,252 - INFO - Top 5 Best Selling Products :
+Product
+Monitor    €347,995.64
+Phone      €326,211.21
+Printer    €325,584.95
+Chair      €319,442.15
+Tablet     €308,449.27
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:38:09,252 - INFO - Bottom 3 Selling Products   :
+Product
+Unknown      €1,418.52
+Laptop     €283,192.67
+Desk       €295,349.14
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:38:09,252 - INFO - Sales by Location :
+              Revenue  Units_Sold
+Location                         
+Store A   €522,302.16        2630
+Store B   €538,392.13        2719
+Store C   €595,009.04        3007
+Store D   €551,940.22        2701
+
+2026-05-09 20:38:09,252 - INFO - Sales by Time of Day    :
+TimeOfDay
+Evening      €856,664.52
+Afternoon    €794,418.64
+Morning      €556,560.39
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:38:09,252 - INFO - Sales by Payment Type   :
+PaymentType
+Debit Card     €498,721.24
+Credit Card    €474,156.66
+Online         €435,782.08
+Cash           €416,599.23
+Gift Card      €382,384.34
+Name: TotalPrice, dtype: object
+
+2026-05-09 20:38:09,252 - INFO - Top Store Manager       : Noah (€608,430.74)
+
+2026-05-09 20:38:09,252 - INFO - Generating multi-chart dashboard...
+2026-05-09 20:38:10,205 - INFO - Dashboard saved to output\sales_dashboard.png
+2026-05-09 20:38:10,205 - INFO - Generating multi-chart dashboard...
+2026-05-09 20:38:11,080 - INFO - Dashboard saved to output\sales_dashboard.png
+2026-05-09 20:38:11,926 - INFO - File saved to output/merged_sales.xlsx
