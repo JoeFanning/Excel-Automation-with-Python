@@ -20,9 +20,10 @@ if not exist venv (
     echo Updating internal tools...
     python -m pip install --upgrade pip -q
 
-    :: 5. Install libraries
+    :: 5. Install libraries like Pandas and Matplotlib
     echo [2/2] Installing libraries...
-    pip install . --use-feature=in-tree-build -q
+    pip install . -q
+
 ) else (
     :: 6. Just activate
     echo [1/2] Environment ready.
@@ -32,6 +33,13 @@ if not exist venv (
 :: 7. Run the Python automation script
 echo [2/2] Processing Excel files...
 python main.py
+if %ERRORLEVEL% NEQ 0 (
+    echo ===========================================
+    echo   ERROR: The script failed to run.
+    echo ===========================================
+    pause
+    exit /b %ERRORLEVEL%
+)
 
 :: 8. Final success message
 echo ===========================================
