@@ -1,49 +1,53 @@
-# Excel Automation with Python
+# 📊 Sales Analysis & Excel Automation System
 
-This repository provides a streamlined way to automate Microsoft Excel tasks using Python. It is built for efficiency, using modern standards to manage dependencies and providing simple, one-click shortcuts for users on any operating system.
+A professional Python-based solution designed to automate the merging, analysis, and reporting of weekly sales data. This system transforms raw data into a multi-tab executive report and a high-impact visual dashboard.
 
-## 🚀 Key Features
-
-**One-Click Workflows:** Execute complex Python logic via simple batch or command scripts.
-*   **Modern Management:** Uses `pyproject.toml` for seamless installation and dependency handling.
-*   **Data Power:** Leverages `pandas` for heavy data crunching and `openpyxl` for fine-tuned Excel formatting.
-*   **Automated Visuals:** Generate professional charts and data visualizations directly within your workbooks.
-*   **Cross-Platform:** Native execution support for Windows and macOS.
+## 🚀 Key Features for Clients
 
 
-## 🖱️ One-Click Execution
+| Feature | Description |
+| :--- | :--- |
+| **Data Consolidation** | Automatically merges multiple weekly Excel workbooks into a single master file. |
+| **Multi-Tab Reporting** | Generates a professional `.xlsx` file with dedicated sheets for each KPI. |
+| **Sales by Payment** | Breakdown of revenue across **Cash, Card, Online, and Gift Cards**. |
+| **Visual Insights** | Automatically generates a `.png` dashboard for quick performance reviews. |
+| **Direct Delivery** | Built-in email module to send reports directly to stakeholders. |
 
-No need to open a code editor or use the terminal manually. Just use the launcher for your system:
+---
 
-### **Windows (`.bat`)**
-- **To Run:** Double-click `run_automation.bat`.
-- **Benefit:** It triggers the Python environment and keeps the window open so you can see the "Success" message or troubleshoot any data errors.
+## 📈 Multi-Tab Report Structure
+The generated Excel report (`sales_analysis_report.xlsx`) includes the following dedicated tabs:
 
-### **macOS (`.command`)**
-- **To Run:** Double-click `run_automation.command`.
-- **Note:** On first use, you may need to grant permission by right-clicking the file and selecting "Open," or by running `chmod +x run_automation.command` in your terminal to make it executable.
+1. **Executive Summary** - Core KPIs: Revenue, Units Sold, and Average Order Value.
+2. **Sales by Location** - Regional performance across all store branches.
+3. **Product Performance** - Analysis of Top 5 Best Sellers and Bottom 3 Performers.
+4. **Payment Type Breakdown** - Revenue split by different payment methods.
+5. **Time of Day** - Identifying peak sales hours (Morning, Afternoon, Evening).
 
-## 🛠️ Installation & Setup
+---
 
-1.  **Clone the Repo:**
-    ```bash
-    git clone https://github.com/JoeFanning/Excel-Automation-with-Python.git)
-    cd Excel-Automation-with-Python
-    ```
+## ⚡ One-Click Execution
+Designed for non-technical users. No need to open a terminal—simply use the launcher for your system:
 
-2.  **Install Dependencies:**
-    This project is configured for a standard installation. Simply run:
-    ```bash
-    pip install .
-    ```
-    This will automatically read the `pyproject.toml` configuration and install all necessary tools like `pandas` and `openpyxl`.
+*   **Windows:** Double-click `run_automation.bat`
+*   **macOS/Linux:** Double-click `run_automation.command`
 
-## 💻 Usage
+---
 
-1. Place your source Excel files in the designated input folder.
-2. Run your OS-specific launcher (the `.bat` or `.command` file).
-3. Find your processed results in the output folder.
+## 🛠 Project Architecture
 
-## 📄 License
-This project is open-source and free to use for personal or commercial automation.
+*   `main.py`: The central coordinator for the entire automation pipeline.
+*   `src/io_manager.py`: Manages file merging and complex multi-sheet Excel writing.
+*   `src/calculations.py`: The engine performing sales math and trend analysis.
+*   `src/visuals.py`: Generates the graphical charts and dashboards.
+*   `src/mailer.py`: Handles secure SMTP email delivery with attachments.
 
+---
+
+## 💻 How to Use
+
+1. **Input:** Drop your weekly Excel files into the `/input` folder.
+2. **Process:** Run the automation using the `.bat` / `.command` files or `python main.py`.
+3. **Output:** Your finalized report and dashboard will be waiting in the `/output` folder.
+
+---
