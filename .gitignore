@@ -6,8 +6,6 @@ _internal/
 
 # Local data and logs
 logs/
-output/
-input/*.xlsx
 
 # Python system files
 __pycache__/
