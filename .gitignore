@@ -4,9 +4,6 @@ build/
 _internal/
 *.spec
 
-# Local data and logs
-logs/
-
 # Python system files
 __pycache__/
 .idea/
