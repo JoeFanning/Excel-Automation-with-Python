@@ -1,0 +1,15 @@
+# PyInstaller folders
+dist/
+build/
+_internal/
+*.spec
+
+# Local data and logs
+logs/
+output/
+input/*.xlsx
+
+# Python system files
+__pycache__/
+.idea/
+.venv/

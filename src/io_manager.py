@@ -48,3 +48,37 @@ def save_to_excel(df, output_path, logger):
         logger.info(f"File saved to {output_path}")
     except PermissionError:
         logger.error(f"Permission Denied: Close {output_path} and retry.")
+
+
+import pandas as pd
+
+
+def save_analysis_to_excel(data_frames_dict, output_file, logger):
+    """
+    This function creates ONE file with MULTIPLE tabs.
+    """
+    try:
+        # 1. Open the file 'bubble'
+        with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
+
+            # 2. Loop through every metric in your dictionary
+            for sheet_name, data in data_frames_dict.items():
+
+                # 3. Convert to DataFrame if it isn't one already (like a Series)
+                if isinstance(data, pd.Series):
+                    df_to_save = data.reset_index()
+                else:
+                    df_to_save = data
+
+                # 4. Save to its own tab
+                # We show the index only for 'Sales by Location'
+                show_idx = True if "Location" in sheet_name else False
+                df_to_save.to_excel(writer, sheet_name=sheet_name[:31], index=show_idx)
+
+                logger.info(f"Successfully added sheet: {sheet_name}")
+
+        logger.info(f"DONE: All metrics saved to {output_file}")
+
+    except Exception as e:
+        logger.error(f"Excel Export Error: {e}")
+
