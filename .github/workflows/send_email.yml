@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - 'sales_analysis_report.xlsx' # Triggers immediately when your desktop app updates this file
+      - 'sales_analysis_report.xlsx'
 
 jobs:
   run-mailer-script:
@@ -21,9 +21,17 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Run Email Reporter Script
+    - name: Locate and Run Mailer Script
       env:
-        # Pulls your hidden Brevo keys securely out of your GitHub settings
         BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
         BREVO_SMTP_KEY: ${{ secrets.BREVO_SMTP_KEY }}
-      run: python run_reporter.py
+      run: |
+        SCRIPT_PATH=$(find . -name "run_reporter.py" -print -quit)
+        if [ -z "$SCRIPT_PATH" ]; then
+          echo "CRITICAL ERROR: run_reporter.py cannot be found anywhere in this repository!"
+          echo "Showing all files in repository to find the issue:"
+          ls -R
+          exit 1
+        fi
+        echo "Found script at: $SCRIPT_PATH"
+        python "$SCRIPT_PATH"
