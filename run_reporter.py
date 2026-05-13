@@ -42,18 +42,20 @@ def main():
     part.add_header("Content-Disposition", f"attachment; filename={file_name}")
     msg.attach(part)
 
-    # 4. Route securely through Brevo SMTP relay
+        # 4. Route securely through Brevo SMTP relay using implicit SSL
     try:
-        print("Connecting to Brevo Relay Server...")
-        with smtplib.SMTP("brevo.com", 587) as server:
-            server.ehlo()
-            server.starttls()
+        print("Connecting to Brevo Relay Server over Secure Port 465...")
+        
+        # CHANGED: Using SMTP_SSL and port 465 to bypass firewall drops
+        with smtplib.SMTP_SSL("smtp-relay.brevo.com", 465) as server:
             server.ehlo()
             server.login(sender_email, brevo_smtp_key)
             server.send_message(msg)
+            
         print("Success! Email sent smoothly via GitHub Cloud.")
     except Exception as e:
         print(f"Delivery Failure Error: {e}")
+
 
 if __name__ == "__main__":
     main()
