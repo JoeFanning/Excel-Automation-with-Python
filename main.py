@@ -1,36 +1,44 @@
-from src.gui import get_files_window
+import logging
+from src.gui import ExcelAutomationGUI  # Updated import path
 from src.io_manager import setup_logging, merge_excel_files, save_to_excel, save_analysis_to_excel
 from src.clean_sort_data import clean_data, sort_data
 from src.calculations import perform_calculations
 from src.visuals import create_sales_dashboard
 from src.mailer import send_email_report
 
-def main():
-    logger = setup_logging()
+# Global logger initialization
+logger = setup_logging()
+
+
+def run_sales_pipeline(files):
+    """
+    This function processes the entire data pipeline workflow sequence
+    and returns (True, success_message) or (False, error_message).
+    """
     try:
-        # import excel files with gui window
-        files = get_files_window()
-        # merge excel files
+        logger.info(f"Pipeline triggered via desktop app for {len(files)} file(s).")
+
+        # 1. Merge Excel files
         merged_df = merge_excel_files(files, "merged_sales.xlsx", logger)
 
-        # process data in merged file
+        # 2. Process data in merged file
         merged_df = clean_data(merged_df, logger)
         merged_df = sort_data(merged_df, logger)
 
-        # Run Analysis & Charts
+        # 3. Run Analysis & Charts
         metrics = perform_calculations(merged_df, logger)
 
-        # Draw visuals and capture the file path (Only call this ONCE)
+        # 4. Draw visuals and capture the file path
         chart_file = create_sales_dashboard(merged_df, "output", logger)
 
-        # 3. Final Save to Excel
+        # 5. Final Save to Excel
         save_to_excel(merged_df, "output/merged_sales.xlsx", logger)
 
         analysis_file = "output/sales_analysis_report.xlsx"
         if "results_dict" in metrics:
             save_analysis_to_excel(metrics["results_dict"], analysis_file, logger)
 
-        # 4. Prepare Email Summary
+        # 6. Prepare Email Summary
         summary_text = (
             f"Hello,\n\n"
             f"The weekly sales automation has completed successfully.\n\n"
@@ -40,19 +48,30 @@ def main():
             f"Please find the visual dashboard and detailed report attached."
         )
 
-        # 5. Send ONE Final Email with BOTH attachments
+        # 7. Send ONE Final Email with BOTH attachments
         attachments = [chart_file, analysis_file]
 
         send_email_report(
             "Weekly Sales Dashboard Report",
             summary_text,
             "client@example.com",
-            attachments,  # Pass the list here
+            attachments,
             logger
         )
 
+        logger.info("Pipeline completed successfully without errors.")
+        return True, "Weekly automation completed successfully!\nReports saved and summary email sent."
+
     except Exception as e:
-        logger.error(f"Critical Error: {e}")
+        logger.error(f"Critical Pipeline Error: {e}")
+        return False, f"Critical Pipeline Error occurred:\n\n{e}"
+
+
+def main():
+    # Start up the permanent UI and hand it our pipeline function engine link
+    app = ExcelAutomationGUI(pipeline_callback=run_sales_pipeline)
+    app.run()
+
 
 if __name__ == "__main__":
     main()
