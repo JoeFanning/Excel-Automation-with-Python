@@ -11,7 +11,7 @@ def send_email_report(subject, body, to_email, attachments, logger):
     Sends an email with multiple file attachments.
     :param attachments: List of file paths or a single file path string.
     """
-    sender_email = "joespirial@mail.com"  # Replace with your Gmail
+    sender_email = "joespirial@hotmail.com"  # Replace with your Gmail
     app_password = "RYXJK-YH4YJ-R55LD-B9P9X-XT7GA"  # Replace with your 16-character App Password
 
     # Create the root message container
