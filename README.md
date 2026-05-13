@@ -1,4 +1,4 @@
-# 📊 Sales Analysis & Excel Automation Desktop Application
+# 📊 Python Excel Automation Desktop Application
 
 A professional, cross-platform **Desktop GUI Application** designed to automate the merging, analysis, cleaning, and reporting of weekly sales data. This system transforms raw spreadsheets into a multi-tab executive workbook and high-impact visual dashboards. 
 
