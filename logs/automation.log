@@ -195,3 +195,4 @@ Name: TotalPrice, dtype: object
 2026-05-13 11:16:51,264 - INFO - Successfully attached: sales_analysis_report.xlsx
 2026-05-13 11:26:53,631 - ERROR - Critical Error: No valid Excel files were successfully loaded to merge into 'merged_sales.xlsx'.
 2026-05-13 12:15:37,617 - ERROR - Critical Error: No valid Excel files were successfully loaded to merge into 'merged_sales.xlsx'.
+2026-05-13 12:53:22,774 - ERROR - Critical Error: No valid Excel files were successfully loaded to merge into 'merged_sales.xlsx'.

@@ -37,4 +37,8 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Desktop-Application-${{ matrix.os }}
-        path: dist/*
+        # EXPLICIT TARGETING: This forces GitHub to grab the actual executable file binaries
+        path: |
+          dist/main.exe
+          dist/main.app
+          dist/main
