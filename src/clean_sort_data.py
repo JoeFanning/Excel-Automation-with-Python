@@ -15,7 +15,6 @@ def clean_data(df, logger):
     logger.info("Data cleaning completed.")
     return df
 
-
 def sort_data(df, logger):
     # Fixed: Passing 'df' into the function so it has data to work with
     df = df.sort_values(

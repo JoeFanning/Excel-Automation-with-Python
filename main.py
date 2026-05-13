@@ -1,3 +1,4 @@
+from src.gui import get_files_window
 from src.io_manager import setup_logging, merge_excel_files, save_to_excel, save_analysis_to_excel
 from src.clean_sort_data import clean_data, sort_data
 from src.calculations import perform_calculations
@@ -7,12 +8,16 @@ from src.mailer import send_email_report
 def main():
     logger = setup_logging()
     try:
-        # 1. Process Data
-        merged_df = merge_excel_files("input", "merged_sales.xlsx", logger)
+        # import excel files with gui window
+        files = get_files_window()
+        # merge excel files
+        merged_df = merge_excel_files(files, "merged_sales.xlsx", logger)
+
+        # process data in merged file
         merged_df = clean_data(merged_df, logger)
         merged_df = sort_data(merged_df, logger)
 
-        # 2. Run Analysis & Charts
+        # Run Analysis & Charts
         metrics = perform_calculations(merged_df, logger)
 
         # Draw visuals and capture the file path (Only call this ONCE)

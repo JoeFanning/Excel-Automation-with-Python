@@ -1,5 +1,4 @@
 import pandas as pd
-import glob
 import logging
 from pathlib import Path
 from logging.handlers import TimedRotatingFileHandler
@@ -22,22 +21,21 @@ def setup_logging():
     return logger
 
 
-def merge_excel_files(input_dir, output_name, logger):
-    input_folder = Path(input_dir)
-    files = glob.glob(str(input_folder / "*.xlsx"))
+def merge_excel_files(files, output_name, logger):
     df_list = []
-
     for file in files:
-        if Path(file).name == output_name: continue
+        file_path = Path(file)
+        if file_path.name == output_name:
+            continue
         try:
-            df = pd.read_excel(file)
+            df = pd.read_excel(file_path)
             df_list.append(df)
-            logger.info(f"Loaded: {Path(file).name}")
+            logger.info(f"Loaded: {file_path.name}")
         except Exception as e:
-            logger.error(f"Error reading {Path(file).name}: {e}")
+            logger.error(f"Error reading {file_path.name}: {e}")
 
     if not df_list:
-        raise ValueError(f"No Excel files found in {input_dir}")
+        raise ValueError(f"No valid Excel files were successfully loaded to merge into '{output_name}'.")
 
     return pd.concat(df_list, ignore_index=True)
 
@@ -50,35 +48,63 @@ def save_to_excel(df, output_path, logger):
         logger.error(f"Permission Denied: Close {output_path} and retry.")
 
 
-import pandas as pd
-
-
 def save_analysis_to_excel(data_frames_dict, output_file, logger):
-    """
-    This function creates ONE file with MULTIPLE tabs.
-    """
+    """This function creates ONE file with MULTIPLE tabs."""
     try:
-        # 1. Open the file 'bubble'
         with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
-
-            # 2. Loop through every metric in your dictionary
             for sheet_name, data in data_frames_dict.items():
-
-                # 3. Convert to DataFrame if it isn't one already (like a Series)
                 if isinstance(data, pd.Series):
                     df_to_save = data.reset_index()
                 else:
                     df_to_save = data
 
-                # 4. Save to its own tab
-                # We show the index only for 'Sales by Location'
                 show_idx = True if "Location" in sheet_name else False
+                # Sheet names are sliced to 31 characters to meet Excel standards
                 df_to_save.to_excel(writer, sheet_name=sheet_name[:31], index=show_idx)
-
                 logger.info(f"Successfully added sheet: {sheet_name}")
 
         logger.info(f"DONE: All metrics saved to {output_file}")
-
     except Exception as e:
         logger.error(f"Excel Export Error: {e}")
 
+
+# ==========================================
+# PIPELINE EXECUTION ENGINE
+# ==========================================
+if __name__ == "__main__":
+    # 1. Initialize logging
+    logger = setup_logging()
+    logger.info("Starting data pipeline execution...")
+
+    # 2. Define input and output directories
+    input_folder = Path("input")
+    input_folder.mkdir(exist_ok=True)
+
+    output_filename = "final_report.xlsx"
+    output_path = Path("output") / output_filename
+    output_path.parent.mkdir(exist_ok=True)
+
+    # 3. Dynamically scan the folder for all Excel files (.xlsx and .xls)
+    excel_files = list(input_folder.glob("*.xlsx")) + list(input_folder.glob("*.xls"))
+    logger.info(f"Found {len(excel_files)} total file(s) inside '{input_folder}'")
+
+    try:
+        # 4. Run the merge routine
+        merged_df = merge_excel_files(excel_files, output_filename, logger)
+
+        # 5. [Optional] Run analysis to build multi-tab reports
+        # Here we mock a scenario mapping out analysis subsets
+        analysis_payload = {
+            "Raw Merged Data": merged_df,
+            "Sales by Location": merged_df.groupby("Location")[
+                "Revenue"].sum() if "Location" in merged_df.columns and "Revenue" in merged_df.columns else merged_df.head(
+                10),
+            "Summary Metrics": merged_df.describe()
+        }
+
+        # 6. Save final multi-tab workbooks
+        save_analysis_to_excel(analysis_payload, output_path, logger)
+        logger.info("Pipeline executed successfully without critical crashes.")
+
+    except Exception as pipeline_err:
+        logger.critical(f"Pipeline stopped: {pipeline_err}")
