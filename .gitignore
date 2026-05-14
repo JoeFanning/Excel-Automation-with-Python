@@ -1,3 +1,7 @@
 ﻿logs/
 output/
 sales_analysis_report.xlsx
+.idea/
+_internal/
+**/__pycache__/
+venv/
