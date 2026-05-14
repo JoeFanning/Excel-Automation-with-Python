@@ -50,7 +50,7 @@ def main():
             encoded_content = base64.b64encode(f.read()).decode("utf-8")
 
         # 5. Core Resend Network URL API Endpoints Layout
-        url = "resend.com"
+        url = "https://api.resend.com/emails""
         headers = {
             "Authorization": f"Bearer {resend_key}",
             "Content-Type": "application/json"
