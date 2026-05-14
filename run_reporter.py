@@ -5,7 +5,7 @@ import requests
 def get_azure_token(tenant_id, client_id, client_secret):
     """Exchanges Azure App credentials for an OAuth2 Access Token."""
    
-url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+    url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
 
     data = {
         "grant_type": "client_credentials",
@@ -13,9 +13,14 @@ url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
         "client_secret": client_secret,
         "scope": "microsoft.com"
     }
-    response = requests.post(url, data=data)
+    
+    # NEW EXECUTION LINES: Sends the data packet over HTTPS to Azure
+    response = requests.post(url, data=data, timeout=15)
     response.raise_for_status()
+    
+    # Extract and return the temporary access key
     return response.json()["access_token"]
+
 
 def main():
     # 1. Fetch Azure cloud variables
