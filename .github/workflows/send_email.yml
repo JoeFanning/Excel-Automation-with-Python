@@ -1,16 +1,3 @@
-name: Automated Cloud Email Reporter
-
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'sales_analysis_report.xlsx'
-
-jobs:
-  run-mailer-script:
-    runs-on: ubuntu-latest
-
     steps:
     - name: Checkout Code Repository
       uses: actions/checkout@v4
@@ -20,11 +7,11 @@ jobs:
       with:
         python-version: '3.11'
 
-    # NEW STEP: Azure communication requires the 'requests' package
-    - name: Install API Dependencies
-      run: pip install requests
+    # FIX: Install all required external data libraries before running the script
+    - name: Install API and Data Dependencies
+      run: |
+        pip install requests pandas openpyxl
 
-    # UPDATED: Enforce Azure credentials mapping via GitHub Vault Secrets
     - name: Locate and Run Mailer Script
       env:
         AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -35,10 +22,7 @@ jobs:
         SCRIPT_PATH=$(find . -name "run_reporter.py" -print -quit)
         if [ -z "$SCRIPT_PATH" ]; then
           echo "CRITICAL ERROR: run_reporter.py cannot be found anywhere in this repository!"
-          echo "Showing all files in repository to find the issue:"
-          ls -R
           exit 1
         fi
         echo "Found script at: $SCRIPT_PATH"
         python "$SCRIPT_PATH"
-
