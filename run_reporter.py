@@ -3,8 +3,8 @@ import base64
 import requests
 
 def get_azure_token(tenant_id, client_id, client_secret):
-    """Exchanges Azure App credentials for an OAuth2 Access Token."""
-   
+    """Exchanges Azure App credentials for an OAuth2 Access Token via the official endpoint."""
+    # url = f"https://microsoftonline.com/{tenant_id}/oauth2/v2.0/token" #This sent an email
     url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
 
     data = {
@@ -14,11 +14,8 @@ def get_azure_token(tenant_id, client_id, client_secret):
         "scope": "microsoft.com"
     }
     
-    # NEW EXECUTION LINES: Sends the data packet over HTTPS to Azure
     response = requests.post(url, data=data, timeout=15)
     response.raise_for_status()
-    
-    # Extract and return the temporary access key
     return response.json()["access_token"]
 
 
