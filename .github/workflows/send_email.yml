@@ -1,3 +1,18 @@
+   name: Automated Cloud Email Reporter
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Adds a manual run button on GitHub
+
+# 1. MANDATORY: The root block that GitHub requires
+jobs:
+  run-mailer-script:
+    # 2. MANDATORY: Allocates a clean virtual machine to run the steps
+    runs-on: ubuntu-latest
+
+    # 3. Your steps paste cleanly inside this job wrapper, shifted right 4 spaces
     steps:
     - name: Checkout Code Repository
       uses: actions/checkout@v4
