@@ -1,5 +1,7 @@
 ﻿logs/
-output/
+output/*
+!output/.gitkeep
+
 sales_analysis_report.xlsx
 .idea/
 _internal/
