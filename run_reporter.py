@@ -2,21 +2,23 @@ import os
 import base64
 import requests
 
-def get_azure_token(tenant_id, client_id, client_secret):
-    """Exchanges Azure App credentials for an OAuth2 Access Token via the official endpoint."""
-    # url = f"https://microsoftonline.com/{tenant_id}/oauth2/v2.0/token" #This sent an email
-    url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
 
-    data = {
-        "grant_type": "client_credentials",
-        "client_id": client_id,
-        "client_secret": client_secret,
-        "scope": "microsoft.com"
-    }
-    
-    response = requests.post(url, data=data, timeout=15)
-    response.raise_for_status()
-    return response.json()["access_token"]
+def get_azure_token(tenant_id, client_id, client_secret):
+    """Exchanges Azure App credentials for an OAuth2 Access Token."""
+
+
+url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+
+data = {
+    "grant_type": "client_credentials",
+    "client_id": client_id,
+    "client_secret": client_secret,
+    "scope": "microsoft.com"
+}
+
+response = requests.post(url, data=data)
+response.raise_for_status()
+return response.json()["access_token"]
 
 
 def main():
@@ -25,7 +27,7 @@ def main():
     client_id = os.environ.get("AZURE_CLIENT_ID")
     client_secret = os.environ.get("AZURE_CLIENT_SECRET")
     sender_email = os.environ.get("AZURE_SENDER_EMAIL")
-    
+
     file_name = "sales_analysis_report.xlsx"
     target_recipient = "joespirial@hotmail.com"
 
@@ -74,21 +76,23 @@ def main():
     try:
         print("Authenticating with Microsoft Identity Platform...")
         token = get_azure_token(tenant_id, client_id, client_secret)
-        
+
         print("Transmitting email via Microsoft Graph API...")
         send_url = f"microsoft.com{sender_email}/sendMail"
         headers = {
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json"
         }
-        
+
         response = requests.post(send_url, json=email_payload, headers=headers)
         response.raise_for_status()
-        
+
         print("Success! Email sent smoothly via Microsoft Azure.")
     except Exception as e:
         print(f"Delivery Failure Error: {e}")
 
+
 if __name__ == "__main__":
+    main()
     main()
 
