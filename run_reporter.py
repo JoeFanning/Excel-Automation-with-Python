@@ -1,98 +1,58 @@
-import os
-import base64
-import requests
+import logging
+from src.gui import ExcelAutomationGUI  # Updated import path
+from src.io_manager import setup_logging, merge_excel_files, save_to_excel, save_analysis_to_excel
+from src.clean_sort_data import clean_data, sort_data
+from src.calculations import perform_calculations
+from src.visuals import create_sales_dashboard
+
+# Global logger initialization
+logger = setup_logging()
 
 
-def get_azure_token(tenant_id, client_id, client_secret):
-    """Exchanges Azure App credentials for an OAuth2 Access Token."""
+def run_sales_pipeline(files):
+    """
+    This function processes the entire data pipeline workflow sequence
+    and returns (True, success_message) or (False, error_message).
+    """
+    try:
+        logger.info(f"Pipeline triggered via desktop app for {len(files)} file(s).")
 
-    url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+        # 1. Merge Excel files
+        merged_df = merge_excel_files(files, "merged_sales.xlsx", logger)
 
-    data = {
-        "grant_type": "client_credentials",
-        "client_id": client_id,
-        "client_secret": client_secret,
-        # Ensure this is set to the universal .default string
-        "scope": "microsoft.com"
-    }
+        # 2. Process data in merged file
+        merged_df = clean_data(merged_df, logger)
+        merged_df = sort_data(merged_df, logger)
 
-    response = requests.post(url, data=data)
-    response.raise_for_status()
-    token = response.json()["access_token"]
+        # 3. Run Analysis & Charts
+        metrics = perform_calculations(merged_df, logger)
+
+        # 4. Draw visuals and capture the file path
+        chart_file = create_sales_dashboard(merged_df, "output", logger)
+
+        # 5. Final Save to Excel
+        save_to_excel(merged_df, "output/merged_sales.xlsx", logger)
+
+        analysis_file = "output/sales_analysis_report.xlsx"
+        if "results_dict" in metrics:
+            save_analysis_to_excel(metrics["results_dict"], analysis_file, logger)
+
+        # ----------------------------------------------------------------------
+        # LOCAL EMAIL STEPS REMOVED — HAND CONTROL OVER TO GITHUB CLOUD UPLOAD
+        # ----------------------------------------------------------------------
+        logger.info("Local calculation engine complete. Returning control to GUI for cloud deployment.")
+        return True, "Weekly automation calculations completed successfully!"
+
+    except Exception as e:
+        logger.error(f"Critical Pipeline Error: {e}")
+        return False, f"Critical Pipeline Error occurred:\n\n{e}"
 
 
 def main():
-    # 1. Fetch Azure cloud variables
-    tenant_id = os.environ.get("AZURE_TENANT_ID")
-    client_id = os.environ.get("AZURE_CLIENT_ID")
-    client_secret = os.environ.get("AZURE_CLIENT_SECRET")
-    sender_email = os.environ.get("AZURE_SENDER_EMAIL")
-
-    file_name = "sales_analysis_report.xlsx"
-    target_recipient = "joespirial@hotmail.com"
-
-    if not all([tenant_id, client_id, client_secret, sender_email]):
-        print("Error: Missing one or more required AZURE environment variables.")
-        return
-
-    if not os.path.exists(file_name):
-        print(f"Error: Target spreadsheet {file_name} was not found.")
-        return
-
-    # 2. Read and encode the Excel file to Base64
-    with open(file_name, "rb") as f:
-        file_content = f.read()
-        encoded_file = base64.b64encode(file_content).decode("utf-8")
-
-    # 3. Construct Microsoft Graph payload
-    email_payload = {
-        "message": {
-            "subject": "Weekly Sales Dashboard Performance Report",
-            "body": {
-                "contentType": "Text",
-                "content": (
-                    "Hello Team,\n\n"
-                    "The weekly sales data automation pipeline has successfully completed data execution.\n\n"
-                    "Please find your processed performance metrics and compiled data dashboard attached below.\n\n"
-                    "Best Regards,\n"
-                    "Automated Reporting Engine"
-                )
-            },
-            "toRecipients": [
-                {"emailAddress": {"address": target_recipient}}
-            ],
-            "attachments": [
-                {
-                    "@odata.type": "#microsoft.graph.fileAttachment",
-                    "name": file_name,
-                    "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    "contentBytes": encoded_file
-                }
-            ]
-        }
-    }
-
-    # 4. Authenticate and transmit via API
-    try:
-        print("Authenticating with Microsoft Identity Platform...")
-        token = get_azure_token(tenant_id, client_id, client_secret)
-
-        print("Transmitting email via Microsoft Graph API...")
-        send_url = f"microsoft.com{sender_email}/sendMail"
-        headers = {
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "application/json"
-        }
-
-        response = requests.post(send_url, json=email_payload, headers=headers)
-        response.raise_for_status()
-
-        print("Success! Email sent smoothly via Microsoft Azure.")
-    except Exception as e:
-        print(f"Delivery Failure Error: {e}")
+    # Start up the permanent UI and hand it our pipeline function engine link
+    app = ExcelAutomationGUI(pipeline_callback=run_sales_pipeline)
+    app.run()
 
 
 if __name__ == "__main__":
     main()
-    main()
-
