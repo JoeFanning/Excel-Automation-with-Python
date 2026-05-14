@@ -1,67 +1,62 @@
-import smtplib
 import os
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+import base64
+import requests
 
 
 def send_email_report(subject, body, to_email, attachments, logger):
     """
-    Sends an email with multiple file attachments.
-    :param attachments: List of file paths or a single file path string.
+    Guaranteed safe desktop mailer.
+    Uses Resend API to handle processing and attachment delivery.
     """
-    sender_email = "joespirial@hotmail.com"  # Replace with your Gmail
-    app_password = "RYXJK-YH4YJ-R55LD-B9P9X-XT7GA"  # Replace with your 16-character App Password
+    # 1. Fetch your Resend API key safely from local system memory
+    resend_key = os.environ.get("RESEND_API_KEY")
 
-    # Create the root message container
-    msg = MIMEMultipart()
-    msg['From'] = sender_email
-    msg['To'] = to_email
-    msg['Subject'] = subject
+    if not resend_key:
+        logger.error("Delivery Failure: RESEND_API_KEY environment variable is not defined.")
+        logger.warning("Please add RESEND_API_KEY to your local PyCharm environment to test.")
+        return
 
-    # Attach the email body
-    msg.attach(MIMEText(body, 'plain'))
-
-    # Ensure attachments is a list (handles single string or list input)
+    # 2. Extract and compile attachments into Resend's expected base64 API layout
+    resend_attachments = []
     if isinstance(attachments, str):
         attachments = [attachments]
 
-    # Loop through and attach each file
     for file_path in attachments:
         if not os.path.isfile(file_path):
-            logger.warning(f"Attachment not found, skipping: {file_path}")
+            logger.warning(f"File missing: {file_path}")
             continue
-
         try:
             with open(file_path, "rb") as f:
-                # Use application/octet-stream for generic file types
-                part = MIMEBase("application", "octet-stream")
-                part.set_payload(f.read())
+                encoded_content = base64.b64encode(f.read()).decode("utf-8")
 
-            # Encode in base64 to ensure proper transmission
-            encoders.encode_base64(part)
-
-            # Extract only the filename from the full path
-            filename = os.path.basename(file_path)
-            part.add_header("Content-Disposition", f"attachment; filename={filename}")
-
-            msg.attach(part)
-            logger.info(f"Successfully attached: {filename}")
+            resend_attachments.append({
+                "filename": os.path.basename(file_path),
+                "content": encoded_content
+            })
+            logger.info(f"Attached for API transmission: {os.path.basename(file_path)}")
         except Exception as e:
-            logger.error(f"Error attaching {file_path}: {e}")
-'''
-    # Send the email using Gmail's SMTP server
+            logger.error(f"Attachment conversion error: {e}")
+
+    # 3. Construct the clean Resend API JSON Request Payload
+    url = "resend.com"
+    headers = {
+        "Authorization": f"Bearer {resend_key}",
+        "Content-Type": "application/json"
+    }
+
+    email_payload = {
+        "from": "Automation Engine <onboarding@resend.dev>",
+        "to": [to_email],
+        "subject": subject,
+        "text": body,
+        "attachments": resend_attachments
+    }
+
+    # 4. Transmit data packet over clean HTTP API gateway
     try:
-        # Use Port 587 with STARTTLS
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
-            server.login(sender_email, app_password)
-            server.send_message(msg)
-
-        logger.info(f"✅ Email sent successfully to {to_email}")
+        logger.info("Connecting to Resend Cloud Engine API...")
+        response = requests.post(url, json=email_payload, headers=headers, timeout=20)
+        response.raise_for_status()
+        logger.info(f"Report safely accepted by Resend and dispatched to {to_email}")
     except Exception as e:
-        logger.error(f"❌ Failed to send email: {e}")
-'''
-
-
+        logger.error(f"Resend Delivery Exception: {e}")

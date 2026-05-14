@@ -1,96 +1,114 @@
+import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from pathlib import Path
+import logging
 
 
 class ExcelAutomationGUI:
     def __init__(self, pipeline_callback):
         """
-        pipeline_callback: The function in main.py that runs your backend data engine.
+        Initializes the clean Desktop User Interface window framework.
         """
         self.pipeline_callback = pipeline_callback
 
-        # 1. Initialize permanent application window
+        # Connect safely back to our single initialized logging stream
+        self.logger = logging.getLogger("ExcelAutomation")
+
         self.root = tk.Tk()
-        self.root.title("Weekly Sales Automation Engine")
-        self.root.geometry("500x320")
-        self.root.config(bg="#f8f9fa")
+        self.root.title("Excel Automation Pipeline Engine")
+        self.root.geometry("500x350")
+        self.root.resizable(False, False)
 
-        # Center window on screen
-        self.root.eval('tk::PlaceWindow . center')
-
-        self._build_ui()
-
-    def _build_ui(self):
-        # Header Title
-        title = tk.Label(
+        # UI Elements Layout Layout Configuration
+        self.label = tk.Label(
             self.root,
-            text="Weekly Sales Data Pipeline",
-            font=("Segoe UI", 16, "bold"),
-            bg="#f8f9fa", fg="#212529"
+            text="Excel Sales Dashboard Automation Engine",
+            font=("Arial", 14, "bold")
         )
-        title.pack(pady=(30, 10))
+        self.label.pack(pady=20)
 
-        # Instructions
-        intro_text = (
-            "Welcome! This desktop tool automates your weekly reporting.\n\n"
-            "1. Click the button below to select raw sales spreadsheets.\n"
-            "2. The system will merge, clean, sort, and calculate metrics.\n"
-            "3. A visual dashboard will generate inside the 'output' folder.\n"
-            "4. A unified summary email will automatically go to your client."
-        )
-        desc = tk.Label(
-            self.root, text=intro_text, font=("Segoe UI", 9),
-            bg="#f8f9fa", fg="#495057", justify="left"
-        )
-        desc.pack(pady=10, padx=25)
-
-        # Main Action Button
-        self.run_btn = tk.Button(
+        self.status_label = tk.Label(
             self.root,
-            text="Select Files & Launch Pipeline",
-            font=("Segoe UI", 11, "bold"),
-            bg="#198754", fg="white",  # Green theme for success/execution
-            activebackground="#157347", activeforeground="white",
-            padx=20, pady=8, cursor="hand2",
-            command=self.trigger_file_picker
+            text="Status: Ready to process data",
+            font=("Arial", 10),
+            fg="blue"
         )
-        self.run_btn.pack(pady=20)
+        self.status_label.pack(pady=10)
+
+        self.process_button = tk.Button(
+            self.root,
+            text="Select Excel Files & Run Pipeline",
+            command=self.trigger_file_picker,
+            font=("Arial", 11, "bold"),
+            bg="#2da44e",
+            fg="white",
+            padx=10,
+            pady=5
+        )
+        self.process_button.pack(pady=30)
 
     def trigger_file_picker(self):
-        # Default explorer look path directly to project input directory
-        input_dir = Path("input").resolve()
-        input_dir.mkdir(exist_ok=True)
-        Path("output").mkdir(exist_ok=True)
+        """Opens a file dialog window allowing users to multi-select target spreadsheets."""
+        self.status_label.config(text="Status: Selecting source spreadsheets...", fg="orange")
+        self.root.update()
 
-        file_paths = filedialog.askopenfilenames(
-            title="Select Weekly Sales Excel Files",
-            initialdir=input_dir,
+        files = filedialog.askopenfilenames(
+            title="Select Monthly Sales Sheets",
             filetypes=[("Excel Files", "*.xlsx *.xls")]
         )
 
-        files = list(file_paths)
-
         if not files:
-            messagebox.showwarning("Staged", "No files selected. Pipeline aborted.")
+            self.status_label.config(text="Status: Ready to process data", fg="blue")
             return
 
-        # Disable button during calculation to prevent double clicks
-        self.run_btn.config(text="Processing Data... Please Wait", state="disabled", bg="#6c757d")
-        self.root.update_idletasks()
+        self.status_label.config(text="Status: Executing data calculations...", fg="orange")
+        self.root.update()
 
-        # Hand off control back to your main.py engine
+        # Trigger the core processing pipeline engine hook
         success, message = self.pipeline_callback(files)
 
-        # Restore button state
-        self.run_btn.config(text="Select Files & Launch Pipeline", state="normal", bg="#198754")
-
-        # Show native alert window based on the pipeline outcome
         if success:
-            messagebox.showinfo("Success", message)
-            self.root.destroy()  # Close application when entirely completed
+            self.status_label.config(text="Status: Success! Email report sent.", fg="green")
+            messagebox.showinfo("Pipeline Completed", message)
         else:
-            messagebox.showerror("Pipeline Failure", message)
+            self.status_label.config(text="Status: Critical Error encountered.", fg="red")
+            messagebox.showerror("Pipeline Failed", message)
+
+    def synchronize_cloud_vault(self):
+        """
+        Communicates with GitHub API tracking logs securely.
+        """
+        # FIX: Wiped out the raw hardcoded plain-text 'ghp_...' token!
+        # Fetches securely out of your system memory workspace environments instead
+        github_token = os.environ.get("GITHUB_TOKEN")
+
+        if not github_token:
+            self.logger.warning("Local GUI: GITHUB_TOKEN environment variable is not defined.")
+            return False
+
+        self.logger.info("Contacting GitHub API to check for existing remote file SHA...")
+
+        url = "github.com"
+        headers = {
+            "Authorization": f"Bearer {github_token}",
+            "User-Agent": "Excel-Automation-Pipeline-App",
+            "Accept": "application/vnd.github+json"
+        }
+
+        # Communicates safely over HTTPS using explicit network timeout gates
+        try:
+            import requests
+            response = requests.get(url, headers=headers, timeout=15)
+            if response.status_code == 200:
+                self.logger.info("Successfully fetched remote tracking metrics metadata.")
+                return response.json().get("sha")
+            else:
+                self.logger.error(f"GitHub API handshake failed with code: {response.status_code}")
+                return None
+        except Exception as e:
+            self.logger.error(f"Cloud synchronization failure: {e}")
+            return None
 
     def run(self):
+        """Starts up the permanent graphical application frame environment loop."""
         self.root.mainloop()
