@@ -13,7 +13,9 @@ logger = None
 
 def get_azure_token(tenant_id, client_id, client_secret):
     """Exchanges Azure App credentials for an OAuth2 Access Token via the official endpoint."""
-    url = f"https://microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+    #url = f"https://microsoftonline.com/{tenant_id}/oauth2/v2.0/token" #This sent an email
+    url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+
     data = {
         "grant_type": "client_credentials",
         "client_id": client_id,
