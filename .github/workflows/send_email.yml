@@ -20,7 +20,7 @@ jobs:
 
     - name: Install API and Data Dependencies
       run: |
-        pip install requests pandas openpyxl
+        pip install requests pandas openpyxl matplotlib
 
     - name: Locate and Run Mailer Script
       env:
