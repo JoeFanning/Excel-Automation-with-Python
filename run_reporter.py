@@ -11,7 +11,6 @@ url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
 data = {
     "grant_type": "client_credentials",
     "client_id": client_id,
-    "tenant_id" : tenant_id,
     "client_secret": client_secret,
     # Ensure this is set to the universal .default string
     "scope": "microsoft.com"
