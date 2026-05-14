@@ -77,18 +77,28 @@ This project leverages an automated **GitHub Actions CI/CD Pipeline** to compile
 To run the automation locally or deploy the standalone app package, ensure the application binary sits directly adjacent to your active input and output workspaces or folders:
 
 
-## Project Architecture Blueprint
-Here is how the automation network is working:
+---
 
+## 🏗️ Core Pipeline Infrastructure Layout
+
+The platform relies on a dual-runtime execution framework that completely isolates your local client desktop activities from automated background cloud processing pipelines [1]:
+
+```text
+                  ┌───────────────────────────────┐
                   │   ExcelAutomation Repository  │
                   └───────────────┬───────────────┘
                                   │
          ┌────────────────────────┴────────────────────────┐
          ▼                                                 ▼
  🖥️ LOCAL DESKTOP APP                              ☁️ HEADLESS CLOUD PIPELINE
-   - File: main.py                                   - File: run_reporter.py
+   - File: `main.py`                                 - File: `run_reporter.py`
    - Uses PyCharm's system environment               - Triggered via GitHub Actions on push
    - Launches a real Tkinter GUI frame               - Runs on a remote Linux server container
    - Compiles local data sheets                      - Merges all monthly sales sheets
    - Sends emails securely via Resend                - Emails the €2,207,643.55 report
 ```
+
+### ⚙️ Operational Flow Summary
+
+1. **Local Desktop Space:** The client interacts with a clean Tkinter window interface via `main.py`, selects local spreadsheets, translates columns, calculates revenue metrics locally, and dispatches files instantly over the **Resend API Gateway** using local environment secrets [1].
+2. **Cloud Automation Space:** Whenever a new raw data workbook is committed or pushed directly into the tracking directory repository branch on GitHub, the headless cloud script `run_reporter.py` takes over inside an isolated virtual container, compiles the multi-chart dashboard canvases, and fires the report to the target team mailbox automatically [1].
