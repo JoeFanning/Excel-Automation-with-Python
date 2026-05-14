@@ -13,12 +13,15 @@ data = {
     "grant_type": "client_credentials",
     "client_id": client_id,
     "client_secret": client_secret,
+    # Ensure this is set to the universal .default string
     "scope": "microsoft.com"
 }
 
 response = requests.post(url, data=data)
 response.raise_for_status()
-return response.json()["access_token"]
+
+# FIX: Change 'return' to 'token =' so Python doesn't crash
+token = response.json()["access_token"]
 
 
 def main():
