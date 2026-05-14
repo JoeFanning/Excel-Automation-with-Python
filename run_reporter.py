@@ -4,7 +4,9 @@ import requests
 
 def get_azure_token(tenant_id, client_id, client_secret):
     """Exchanges Azure App credentials for an OAuth2 Access Token."""
-    url = f"microsoftonline.com{tenant_id}/oauth2/v2.0/token"
+   
+url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+
     data = {
         "grant_type": "client_credentials",
         "client_id": client_id,
