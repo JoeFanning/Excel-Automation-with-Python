@@ -7,17 +7,25 @@ from logging.handlers import TimedRotatingFileHandler
 def setup_logging():
     log_folder = Path("logs")
     log_folder.mkdir(exist_ok=True)
-    logger = logging.getLogger("Automation")
+    
+    # FIX 1: Harmonized name to "ExcelAutomation" to match main.py exactly
+    logger = logging.getLogger("ExcelAutomation")
     logger.setLevel(logging.INFO)
 
-    if not logger.handlers:
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        file_handler = TimedRotatingFileHandler(log_folder / "automation.log", when="midnight", backupCount=7)
-        file_handler.setFormatter(formatter)
-        console_handler = logging.StreamHandler()
-        console_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-        logger.addHandler(console_handler)
+    # FIX 2: Force clear any lingering handlers to release Windows file locks
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    # Re-initialize cleanly without risk of duplication or file locks
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler = TimedRotatingFileHandler(log_folder / "automation.log", when="midnight", backupCount=7)
+    file_handler.setFormatter(formatter)
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+    
     return logger
 
 
@@ -69,7 +77,7 @@ def save_analysis_to_excel(data_frames_dict, output_file, logger):
 
 
 # ==========================================
-# PIPELINE EXECUTION ENGINE
+# PIPELINE EXECUTION ENGINE (LOCAL TESTING)
 # ==========================================
 if __name__ == "__main__":
     # 1. Initialize logging
@@ -92,13 +100,10 @@ if __name__ == "__main__":
         # 4. Run the merge routine
         merged_df = merge_excel_files(excel_files, output_filename, logger)
 
-        # 5. [Optional] Run analysis to build multi-tab reports
-        # Here we mock a scenario mapping out analysis subsets
+        # 5. Run analysis to build multi-tab reports
         analysis_payload = {
             "Raw Merged Data": merged_df,
-            "Sales by Location": merged_df.groupby("Location")[
-                "Revenue"].sum() if "Location" in merged_df.columns and "Revenue" in merged_df.columns else merged_df.head(
-                10),
+            "Sales by Location": merged_df.groupby("Location")["Revenue"].sum() if "Location" in merged_df.columns and "Revenue" in merged_df.columns else merged_df.head(10),
             "Summary Metrics": merged_df.describe()
         }
 
@@ -107,4 +112,5 @@ if __name__ == "__main__":
         logger.info("Pipeline executed successfully without critical crashes.")
 
     except Exception as pipeline_err:
-        logger.critical(f"Pipeline stopped: {pipeline_err}")
+        logger.critical(f"Pipeline crashed during execution: {pipeline_err}")
+
