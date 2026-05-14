@@ -56,7 +56,8 @@ if not exist venv (
     "%~dp0venv\Scripts\python.exe" -m pip install --upgrade pip -q
 
     echo [2/2] Installing package dependencies...
-    "%~dp0venv\Scripts\pip.exe" install -r requirements.txt -q
+    "%~dp0venv\Scripts\pip.exe" install -r requirements.txt --timeout 60 --index-url https://pypi.org --extra-index-url https://cloudflare.com --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host ://cloudflare.com -q
+
 ) else (
     echo [1/2] Environment verified.
 )
