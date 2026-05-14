@@ -1,4 +1,3 @@
-
 name: Automated Cloud Email Reporter
 
 on:
@@ -21,10 +20,17 @@ jobs:
       with:
         python-version: '3.11'
 
+    # NEW STEP: Azure communication requires the 'requests' package
+    - name: Install API Dependencies
+      run: pip install requests
+
+    # UPDATED: Enforce Azure credentials mapping via GitHub Vault Secrets
     - name: Locate and Run Mailer Script
       env:
-        BREVO_SENDER_EMAIL: ${{ secrets.BREVO_SENDER_EMAIL }}
-        BREVO_SMTP_KEY: ${{ secrets.BREVO_SMTP_KEY }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        AZURE_SENDER_EMAIL: ${{ secrets.AZURE_SENDER_EMAIL }}
       run: |
         SCRIPT_PATH=$(find . -name "run_reporter.py" -print -quit)
         if [ -z "$SCRIPT_PATH" ]; then
@@ -35,3 +41,4 @@ jobs:
         fi
         echo "Found script at: $SCRIPT_PATH"
         python "$SCRIPT_PATH"
+
