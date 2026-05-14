@@ -14,12 +14,21 @@ jobs:
           - os: windows-latest
             artifact_name: Desktop-Application-Windows
             artifact_path: dist/main.exe
+            # Windows uses a single file executable bundle
+            pyinstaller_flags: --noconsole --onefile
+
           - os: macos-latest
             artifact_name: Desktop-Application-Mac
             artifact_path: dist/main.app
+            # Mac GUI apps must use standard windowed directory bundles
+            pyinstaller_flags: --noconsole --onedir
+
           - os: ubuntu-latest
             artifact_name: Desktop-Application-Linux
             artifact_path: dist/main
+            # Linux utilizes a standalone core binary bundle
+            pyinstaller_flags: --noconsole --onefile
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -33,21 +42,25 @@ jobs:
         cache: 'pip'
 
     - name: Install Project Dependencies
+      # Swapped conditional check to look for setup layouts first, falling back to local pip hooks
       run: |
         python -m pip install --upgrade pip
-        # Optional check if requirements file is missing in subfolders
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        elif [ -f pyproject.toml ] || [ -f setup.py ]; then
+          pip install .
+        fi
         pip install pyinstaller requests
       shell: bash
 
     - name: Compile Standalone Application
+      # Added --paths=. so PyInstaller traces the /src engine modules accurately
       run: |
-        pyinstaller --noconsole --onefile main.py
+        pyinstaller ${{ matrix.pyinstaller_flags }} --paths=. main.py
 
     - name: Upload Compiled Binary Packages
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.artifact_name }}
         path: ${{ matrix.artifact_path }}
-        # Prevents build failure flags if a runner system has path compilation anomalies
         if-no-files-found: error

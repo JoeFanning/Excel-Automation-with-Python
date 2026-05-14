@@ -27,7 +27,59 @@ if not exist venv (
 ) else (
     :: 6. Just activate
     echo [1/2] Environment ready.
-    call venv\Scripts\activate
+    cal@echo off
+setlocal enabledelayedexpansion
+cd /d "%~dp0"
+
+echo ===========================================
+echo   EXCEL AUTOMATION SYSTEM - STARTING
+echo ===========================================
+
+:: 1. Verify Python is installed
+where python >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    echo ERROR: Python is not installed or not in system PATH.
+    pause
+    exit /b 1
+)
+
+:: 2. Setup Virtual Environment if missing
+if not exist venv (
+    echo [1/2] Creating local virtual environment...
+    python -m venv venv
+    if %ERRORLEVEL% NEQ 0 (
+        echo ERROR: Failed to create virtual environment.
+        pause
+        exit /b %ERRORLEVEL%
+    )
+    echo Updating internal deployment tools...
+    "%~dp0venv\Scripts\python.exe" -m pip install --upgrade pip -q
+
+    echo [2/2] Installing package dependencies...
+    "%~dp0venv\Scripts\pip.exe" install -r requirements.txt -q
+) else (
+    echo [1/2] Environment verified.
+)
+
+:: 3. Set Python Path to find the /src directory modules properly
+set PYTHONPATH=%~dp0
+
+:: 4. Run the launcher
+echo [2/2] Launching Desktop GUI Pipeline...
+"%~dp0venv\Scripts\python.exe" main.py
+if %ERRORLEVEL% NEQ 0 (
+    echo ===========================================
+    echo   ERROR: The application crashed or failed.
+    echo ===========================================
+    pause
+    exit /b %ERRORLEVEL%
+)
+
+echo ===========================================
+echo   SUCCESS: Operations completed.
+echo ===========================================
+pause
+l venv\Scripts\activate
 )
 
 :: 7. Run the Python automation script
