@@ -37,8 +37,8 @@ def main():
         if not all([tenant_id, client_id, client_secret, sender_email]):
             raise ValueError("Missing one or more required AZURE environment variables.")
 
-        # 3. Scan the repository workspace root for any raw data Excel files
-        input_folder = Path(".")
+        # 3. Scan the repository workspace 'input' folder for any raw data Excel files
+        input_folder = Path("input")
         excel_files = list(input_folder.glob("*.xlsx")) + list(input_folder.glob("*.xls"))
         
         # Exclude output files from being merged recursively
