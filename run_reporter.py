@@ -17,10 +17,10 @@ def get_azure_token(tenant_id, client_id, client_secret):
 
 def main():
     # 1. Fetch Azure cloud variables
-    tenant_id = os.environ.get("da0617dd-b536-4432-b4bf-390fb40861c8")
-    client_id = os.environ.get("3c804a46-8f84-4122-8e63-4804333c568a")
+    tenant_id = os.environ.get("AZURE_TENANT_ID")
+    client_id = os.environ.get("AZURE_CLIENT_ID")
     client_secret = os.environ.get("AZURE_CLIENT_SECRET")
-    sender_email = os.environ.get("joespirial@hotmail.com")
+    sender_email = os.environ.get("AZURE_SENDER_EMAIL")
     
     file_name = "sales_analysis_report.xlsx"
     target_recipient = "joespirial@hotmail.com"
