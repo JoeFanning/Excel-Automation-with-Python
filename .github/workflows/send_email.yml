@@ -1,4 +1,5 @@
 name: Automated Cloud Email Reporter
+
 on:
   push:
     branches:
@@ -18,21 +19,14 @@ jobs:
       with:
         python-version: '3.11'
 
+    # FIXED: Added matplotlib directly into the automated cloud installation array
     - name: Install API and Data Dependencies
       run: |
         pip install requests pandas openpyxl matplotlib
 
     - name: Locate and Run Mailer Script
       env:
-        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        AZURE_SENDER_EMAIL: ${{ secrets.AZURE_SENDER_EMAIL }}
+        RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
       run: |
         SCRIPT_PATH=$(find . -name "run_reporter.py" -print -quit)
-        if [ -z "$SCRIPT_PATH" ]; then
-          echo "CRITICAL ERROR: run_reporter.py cannot be found anywhere in this repository!"
-          exit 1
-        fi
-        echo "Found script at: $SCRIPT_PATH"
         python "$SCRIPT_PATH"
