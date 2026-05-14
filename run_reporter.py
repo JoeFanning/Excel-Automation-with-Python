@@ -16,9 +16,9 @@ def get_azure_token(tenant_id, client_id, client_secret):
         "scope": "microsoft.com"
     }
 
-response = requests.post(url, data=data)
-response.raise_for_status()
-token = response.json()["access_token"]
+    response = requests.post(url, data=data)
+    response.raise_for_status()
+    token = response.json()["access_token"]
 
 
 def main():
