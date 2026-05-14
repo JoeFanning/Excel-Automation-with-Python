@@ -76,10 +76,19 @@ This project leverages an automated **GitHub Actions CI/CD Pipeline** to compile
 ## 📂 Local Workspace Organization
 To run the automation locally or deploy the standalone app package, ensure the application binary sits directly adjacent to your active input and output workspaces or folders:
 
-```text
-Excel-Automation-Workspace/
-├── input/         <-- Drop your raw weekly Excel files here
-├── output/        <-- Finalized reports and charts generate here
-├── logs/          <-- Local, real-time background error tracing records here
-└── main.exe       <-- Double-click to launch your app window!
+
+## Project Architecture Blueprint
+Here is how the automation network is working:
+
+                  │   ExcelAutomation Repository  │
+                  └───────────────┬───────────────┘
+                                  │
+         ┌────────────────────────┴────────────────────────┐
+         ▼                                                 ▼
+ 🖥️ LOCAL DESKTOP APP                              ☁️ HEADLESS CLOUD PIPELINE
+   - File: main.py                                   - File: run_reporter.py
+   - Uses PyCharm's system environment               - Triggered via GitHub Actions on push
+   - Launches a real Tkinter GUI frame               - Runs on a remote Linux server container
+   - Compiles local data sheets                      - Merges all monthly sales sheets
+   - Sends emails securely via Resend                - Emails the €2,207,643.55 report
 ```
