@@ -1,3 +1,4 @@
+import pandas
 import logging
 from src.gui import ExcelAutomationGUI  # Updated import path
 from src.io_manager import setup_logging, merge_excel_files, save_to_excel, save_analysis_to_excel
