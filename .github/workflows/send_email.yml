@@ -4,15 +4,12 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Adds a manual run button on GitHub
+  workflow_dispatch: 
 
-# 1. MANDATORY: The root block that GitHub requires
 jobs:
   run-mailer-script:
-    # 2. MANDATORY: Allocates a clean virtual machine to run the steps
     runs-on: ubuntu-latest
 
-    # 3. Your steps paste cleanly inside this job wrapper, shifted right 4 spaces
     steps:
     - name: Checkout Code Repository
       uses: actions/checkout@v4
@@ -22,7 +19,6 @@ jobs:
       with:
         python-version: '3.11'
 
-    # FIX: Install all required external data libraries before running the script
     - name: Install API and Data Dependencies
       run: |
         pip install requests pandas openpyxl
