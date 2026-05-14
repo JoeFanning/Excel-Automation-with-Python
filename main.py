@@ -20,6 +20,7 @@ def get_azure_token(tenant_id, client_id, client_secret):
     data = {
         "grant_type": "client_credentials",
         "client_id": client_id,
+        "tenant_id" : tenant_id,
         "client_secret": client_secret,
         "scope": "microsoft.com"
     }
