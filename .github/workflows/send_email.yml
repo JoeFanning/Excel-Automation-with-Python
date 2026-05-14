@@ -1,5 +1,4 @@
-   name: Automated Cloud Email Reporter
-
+name: Automated Cloud Email Reporter
 on:
   push:
     branches:
