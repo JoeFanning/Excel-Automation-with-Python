@@ -1,61 +1,89 @@
 import os
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
+import base64
+import requests
+
+def get_azure_token(tenant_id, client_id, client_secret):
+    """Exchanges Azure App credentials for an OAuth2 Access Token."""
+    url = f"microsoftonline.com{tenant_id}/oauth2/v2.0/token"
+    data = {
+        "grant_type": "client_credentials",
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "scope": "microsoft.com"
+    }
+    response = requests.post(url, data=data)
+    response.raise_for_status()
+    return response.json()["access_token"]
 
 def main():
-    # Pulls your secure Brevo credentials out of the GitHub cloud vault
-    sender_email = os.environ.get("BREVO_SENDER_EMAIL")
-    brevo_smtp_key = os.environ.get("BREVO_SMTP_KEY")
+    # 1. Fetch Azure cloud variables
+    tenant_id = os.environ.get("da0617dd-b536-4432-b4bf-390fb40861c8")
+    client_id = os.environ.get("3c804a46-8f84-4122-8e63-4804333c568a")
+    client_secret = os.environ.get("AZURE_CLIENT_SECRET")
+    sender_email = os.environ.get("joespirial@hotmail.com")
     
-    # Matches the exact file your desktop app uploaded
-    file_name = "sales_analysis_report.xlsx" 
+    file_name = "sales_analysis_report.xlsx"
     target_recipient = "joespirial@hotmail.com"
 
-    if not os.path.exists(file_name):
-        print(f"Error: Target spreadsheet {file_name} was not found in the repository root.")
+    if not all([tenant_id, client_id, client_secret, sender_email]):
+        print("Error: Missing one or more required AZURE environment variables.")
         return
 
-    # 1. Build the email headers
-    msg = MIMEMultipart()
-    msg['From'] = f"Automated Reporter <{sender_email}>"
-    msg['To'] = target_recipient
-    msg['Subject'] = "Weekly Sales Dashboard Performance Report"
+    if not os.path.exists(file_name):
+        print(f"Error: Target spreadsheet {file_name} was not found.")
+        return
 
-    # 2. Design the message body content
-    body_content = (
-        "Hello Team,\n\n"
-        "The weekly sales data automation pipeline has successfully completed data execution.\n\n"
-        "Please find your processed performance metrics and compiled data dashboard attached below.\n\n"
-        "Best Regards,\n"
-        "Automated Reporting Engine"
-    )
-    msg.attach(MIMEText(body_content, 'plain'))
-
-    # 3. Attach the Excel spreadsheet binary
+    # 2. Read and encode the Excel file to Base64
     with open(file_name, "rb") as f:
-        part = MIMEBase("application", "octet-stream")
-        part.set_payload(f.read())
-    encoders.encode_base64(part)
-    part.add_header("Content-Disposition", f"attachment; filename={file_name}")
-    msg.attach(part)
+        file_content = f.read()
+        encoded_file = base64.b64encode(file_content).decode("utf-8")
 
-        # 4. Route securely through Brevo SMTP relay using implicit SSL
+    # 3. Construct Microsoft Graph payload
+    email_payload = {
+        "message": {
+            "subject": "Weekly Sales Dashboard Performance Report",
+            "body": {
+                "contentType": "Text",
+                "content": (
+                    "Hello Team,\n\n"
+                    "The weekly sales data automation pipeline has successfully completed data execution.\n\n"
+                    "Please find your processed performance metrics and compiled data dashboard attached below.\n\n"
+                    "Best Regards,\n"
+                    "Automated Reporting Engine"
+                )
+            },
+            "toRecipients": [
+                {"emailAddress": {"address": target_recipient}}
+            ],
+            "attachments": [
+                {
+                    "@odata.type": "#microsoft.graph.fileAttachment",
+                    "name": file_name,
+                    "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    "contentBytes": encoded_file
+                }
+            ]
+        }
+    }
+
+    # 4. Authenticate and transmit via API
     try:
-        print("Connecting to Brevo Relay Server over Secure Port 465...")
+        print("Authenticating with Microsoft Identity Platform...")
+        token = get_azure_token(tenant_id, client_id, client_secret)
         
-        # CHANGED: Using SMTP_SSL and port 465 to bypass firewall drops
-        with smtplib.SMTP_SSL("smtp-relay.brevo.com", 465) as server:
-            server.ehlo()
-            server.login(sender_email, brevo_smtp_key)
-            server.send_message(msg)
-            
-        print("Success! Email sent smoothly via GitHub Cloud.")
+        print("Transmitting email via Microsoft Graph API...")
+        send_url = f"microsoft.com{sender_email}/sendMail"
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.post(send_url, json=email_payload, headers=headers)
+        response.raise_for_status()
+        
+        print("Success! Email sent smoothly via Microsoft Azure.")
     except Exception as e:
         print(f"Delivery Failure Error: {e}")
-
 
 if __name__ == "__main__":
     main()
