@@ -11,23 +11,21 @@ from src.visuals import create_sales_dashboard
 # We initialize this safely inside main() to prevent WinError 32 file handler locks
 logger = None
 
-
 def get_azure_token(tenant_id, client_id, client_secret):
     """Exchanges Azure App credentials for an OAuth2 Access Token via the official endpoint."""
-    url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+    url = f"microsoftonline.com{tenant_id}/oauth2/v2.0/token"
 
     data = {
         "grant_type": "client_credentials",
         "client_id": client_id,
         "client_secret": client_secret,
-        "scope": "microsoft.com"
+        "scope": "microsoft.com"  # Required for Application permissions
     }
 
     response = requests.post(url, data=data, timeout=15)
     response.raise_for_status()
     return response.json()["access_token"]
-
-
+   
 def run_sales_pipeline(files):
     """
     Processes the data pipeline sequence locally, and then transmits
